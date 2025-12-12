@@ -1,0 +1,55 @@
+@import url("style.css");
+
+body {
+  background-color: var(--rouge);
+  margin-top: 0;
+}
+
+h1 {
+  margin: 0;
+}
+
+.cls-1 {
+  stroke-width: 16px;
+}
+
+.cls-1,
+.cls-2,
+.cls-3,
+.cls-4 {
+  stroke: var(--or);
+  stroke-miterlimit: 10;
+}
+.cls-6 {
+  fill: var(--or);
+}
+.cls-5 {
+  fill: var(--blanc);
+}
+.cls-2,
+.cls-3 {
+  stroke-width: 10px;
+}
+
+.cls-2,
+.cls-4 {
+  fill: none;
+}
+
+.cls-7 {
+  fill: var(--rouge_roulette);
+}
+
+.cls-4 {
+  stroke-width: 5px;
+}
+
+.roulette_container {
+  max-width: 900px;
+  height: auto;
+  margin: 10vh auto 0 auto;
+}
+
+#roulette_home {
+  width: 100%;
+}

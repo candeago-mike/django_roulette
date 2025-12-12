@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=WDXL+Lubrifont+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Trirong:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Notable&display=swap');
+
+
+:root {
+  --primary-color: #ff6347;   /* variable */
+  --spacing: 16px;
+  --rouge_roulette: #ac151c;
+  --noir_roulette: #000000;
+  --rouge: #710c1e;
+  --rouge_fonce:#4b080f;
+  --vert : #014432;
+  --vert_fonce:#042222;
+  --blanc : #fff8eb;
+  --or : #cd994e;
+  --gris:#333;
+  --font_family: 'Arial', sans-serif;
+  --font_h1: "Notable", sans-serif;
+  --font_h2:"Trirong", serif
+  --font_chrono :"WDXL Lubrifont SC", sans-serif;
+}
+
+body {
+    margin:50px auto 0 auto;
+    max-width: 1200px;
+    background-color: var(--blanc);
+    min-height: 100vh;
+}
+
+h1 {
+    font-family: var(--font_h1);
+    font-weight: 400;
+    font-style: normal;
+    color: var(--blanc);
+    font-size:5em;
+}
+h2 {
+    font-family: var(--font_h2);
+    font-weight: 400;
+    font-style: normal;
+}

@@ -1,0 +1,50 @@
+@import url("style.css");
+
+body{
+    background-color: var(--vert);
+}
+
+.chrono {
+    font-family: var(--font_h1);
+    color: var(--blanc);
+    font-weight: 400;
+    font-style: normal;
+}
+
+.roulette-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
+.roulette {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 5px solid #333;
+    position: relative;
+    transform: rotate(0deg);
+    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
+}
+.number {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: #fff;
+}
+.arrow {
+    position: absolute;
+    top: 47%;
+    right: -5%;
+    transform: rotate(-90deg);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid red;
+    z-index: 10;
+}

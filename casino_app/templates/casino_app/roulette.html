@@ -1,0 +1,19 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Roulette</title>
+    <link rel="stylesheet" href="{% static 'css/roulette_style.css' %}" />
+  </head>
+  <body>
+    <h1>Faites vos jeux</h1>
+    <div class="roulette-container">
+      <div class="arrow"></div>
+      <div class="roulette" id="roulette"></div>
+    </div>
+    <p>Numéro tiré : <span id="result-number">0</span></p>
+
+    <script src="{% static 'casino_app/roulette_graphic.js' %}"></script>
+  </body>
+</html>

@@ -1,5 +1,14 @@
 @import url("style.css");
+ :root{
+    --green:#0a6b2f;
+    --dark-green:#064d23;
+    --line:#d7c78a;
+    --cell-width:64px;
+    --cell-height:48px;
+    --gap:6px;
+  }
 
+  
 body{
     background-color: var(--vert);
 }
@@ -48,3 +57,11 @@ body{
     border-bottom: 30px solid red;
     z-index: 10;
 }
+
+
+#tapis {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+

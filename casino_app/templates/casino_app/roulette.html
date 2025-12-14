@@ -8,21 +8,18 @@
   </head>
   <body>
     <h1>Faites vos jeux</h1>
-    <div>
-        <div class="roulette-container">
-          <div class="arrow"></div>
-          <div class="roulette" id="roulette"></div>
-          <p>Numéro tiré : <span id="result-number">0</span></p>
-        </div>
+    <div class="rouletteTapis">
+      <div class="roulette-container">
+        <div class="arrow"></div>
+        <div class="roulette" id="roulette"></div>
+        <p>Numéro tiré : <span id="result-number">0</span></p>
+      </div>
       <div class="tapis-container">
-        <div id="tapis">
-          <!-- Le tapis de la roulette sera généré ici par JavaScript -->
-           
-        </div>
+        <div id="tapis"></div>
       </div>
     </div>
-    
+
     <script src="{% static 'casino_app/tapis.js' %}"></script>
-    <script src="{% static 'casino_app/roulette_graphic.js' %}"></script>
+    <script src="{% static 'casino_app/roulette.js' %}"></script>
   </body>
 </html>

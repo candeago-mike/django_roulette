@@ -13,55 +13,124 @@ body{
     background-color: var(--vert);
 }
 
-.chrono {
-    font-family: var(--font_h1);
-    color: var(--blanc);
-    font-weight: 400;
-    font-style: normal;
+.tapis-container div {
+    font-family: var(--font_family);
+    font-size: 18px;
 }
 
+.rouletteTapis {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
 .roulette-container {
-    position: relative;
-    width: 400px;
-    height: 400px;
-}
-.roulette {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 5px solid #333;
-    position: relative;
-    transform: rotate(0deg);
-    transition: transform 4s cubic-bezier(0.33, 1, 0.68, 1);
-}
-.number {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    color: #fff;
-}
-.arrow {
-    position: absolute;
-    top: 47%;
-    right: -5%;
-    transform: rotate(-90deg);
-    width: 0;
-    height: 0;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-bottom: 30px solid red;
-    z-index: 10;
+  position: relative;
+  width: 400px;
+  height: 400px;
+  margin: 20px auto;
 }
 
+.roulette {
+  position: relative;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  border: 5px solid #333;
+  margin: 0 auto;
+  transition: transform 3s ease-out;
+}
+
+.arrow {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid yellow;
+  z-index: 10;
+}
+
+.number {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 14px;
+}
+
+
+/******** Tapis de jeu ********/
+
+.tapis-container {
+  width: 70%;
+  display: flex;
+  justify-content: flex-end;
+}
 
 #tapis {
+  display: grid;
+  grid-template-columns: 60px repeat(12, 40px) 60px; /* +1 col pour 2 à 1 */
+  grid-auto-rows: 40px;
+  gap: 2px;
+  padding: 10px;
+  color: var(--blanc);
+}
+.case-top-half {
+  border: 1px solid #fff;
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 
+.case-zero {
+  grid-row: 1 / 4;
+  grid-column: 1 / 2;
+  display: flex;
+  align-items: center;
+  border-radius: 20px 0 0 20px;
+  justify-content: center;
+  background: rgb(57, 102, 57);
+}
+
+.case-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.case-red { background: red; }
+.case-black {background: black; }
+
+.case-number.active,
+.case-zero.active {
+  outline: 3px solid var(--or);
+}
+
+.case-outside {
+  border: 1px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.case-outside-red { background: red; }
+.case-outside-black { background: black; }
+
+/* cases 2 à 1 au bout des colonnes */
+.case-column-bet {
+  border: 1px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-
+import random
+from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from .models import Tirage
 def register_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -32,9 +35,19 @@ def logout_view(request):
     return redirect('login')
 
 def roulette_view(request):
-    # if not request.user.is_authenticated:
-    #     return redirect('login')
+    if not request.user.is_authenticated:
+        return redirect('login')
     return render(request, 'casino_app/roulette.html')
 
 def home_view(request):
     return render(request, 'casino_app/home.html')
+@login_required
+def spin_roulette(request):
+    number = random.randint(0, 36)
+
+    Tirage.objects.create(
+        number=number,
+        user=request.user
+    )
+
+    return JsonResponse({"number": number})

@@ -1,21 +1,51 @@
 @import url("style.css");
- :root{
-    --green:#0a6b2f;
-    --dark-green:#064d23;
-    --line:#d7c78a;
-    --cell-width:64px;
-    --cell-height:48px;
-    --gap:6px;
-  }
-
-  
-body{
-    background-color: var(--vert);
+:root {
+  --green: #0a6b2f;
+  --dark-green: #064d23;
+  --line: #d7c78a;
+  --cell-width: 64px;
+  --cell-height: 48px;
+  --gap: 6px;
 }
 
+body {
+  background-color: var(--vert);
+}
+
+.panneau {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:40px;
+}
+
+.money {
+  width: 30px;
+  height: fit-content;
+}
+
+.chiffres, .jetons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.chiffres div {
+  display: flex;
+  background: white;
+  padding: 10px 14px;
+  border-radius: 10px;
+  gap: 20px;
+  align-items: center;
+}
+
+.chiffres p {
+  margin: 0;
+}
 .tapis-container div {
-    font-family: var(--font_family);
-    font-size: 18px;
+  font-family: var(--font_family);
+  font-size: 18px;
 }
 
 .rouletteTapis {
@@ -65,13 +95,14 @@ body{
   font-size: 14px;
 }
 
-
 /******** Tapis de jeu ********/
 
 .tapis-container {
-  width: 70%;
+  width: 60%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 #tapis {
@@ -95,7 +126,7 @@ body{
   grid-column: 1 / 2;
   display: flex;
   align-items: center;
-  border-radius: 20px 0 0 20px;
+  border-radius: 20px 0 0 2 0px;
   justify-content: center;
   background: rgb(57, 102, 57);
 }
@@ -107,8 +138,12 @@ body{
   cursor: pointer;
 }
 
-.case-red { background: red; }
-.case-black {background: black; }
+.case-red {
+  background: red;
+}
+.case-black {
+  background: black;
+}
 
 .case-number.active,
 .case-zero.active {
@@ -123,8 +158,12 @@ body{
   cursor: pointer;
 }
 
-.case-outside-red { background: red; }
-.case-outside-black { background: black; }
+.case-outside-red {
+  background: red;
+}
+.case-outside-black {
+  background: black;
+}
 
 /* cases 2 à 1 au bout des colonnes */
 .case-column-bet {

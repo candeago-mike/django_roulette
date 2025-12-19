@@ -27,28 +27,23 @@ rouletteOrder.forEach((num, i) => {
   roulette.appendChild(div);
 });
 
-// ----- fonction qui lance un tirage -----
-function spinRoulette() {
-  fetch("/spin/")
-    .then((res) => res.json())
-    .then((data) => {
-      const number = data.number;
-      resultDisplay.innerText = number;
 
-      const index = rouletteOrder.indexOf(number);
-      const baseAngle = 360 - (index / rouletteOrder.length) * 360;
-      const stopAngle = baseAngle - 360 * 5;
+function spinRouletteAnimation(number) {
+  // on affiche le numéro gagnant
+  resultDisplay.innerText = number;
 
-      roulette.style.transform = `rotate(${stopAngle}deg)`;
+  const index = rouletteOrder.indexOf(number);
+  if (index === -1) {
+    // au cas où le numéro ne serait pas trouvé (dev)
+    return;
+  }
 
-      if (window.highlightTableNumber) {
-        window.highlightTableNumber(number);
-      }
-    });
+  const baseAngle = 360 - (index / rouletteOrder.length) * 360;
+  const stopAngle = baseAngle - 360 * 5;
+
+  roulette.style.transform = `rotate(${stopAngle}deg)`;
+
+  if (window.highlightTableNumber) {
+    window.highlightTableNumber(number);
+  }
 }
-
-// tirage toutes les 45 secondes
-setInterval(spinRoulette, 45000);
-
-// tirage initial au chargement
-spinRoulette();

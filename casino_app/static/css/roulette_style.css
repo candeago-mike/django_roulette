@@ -17,7 +17,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap:40px;
+  gap: 40px;
 }
 
 .money {
@@ -25,23 +25,32 @@ body {
   height: fit-content;
 }
 
-.chiffres, .jetons {
+.chiffres,
+.jetons {
   display: flex;
   align-items: center;
   gap: 20px;
+}
+
+.chiffres {
+  margin-top: 20px;
 }
 
 .chiffres div {
   display: flex;
-  background: white;
-  padding: 10px 14px;
-  border-radius: 10px;
+  background: black;
+  border: 5px solid grey;
+  padding: 5px 10px;
+  border-radius: 5px;
+  width: 150px;
   gap: 20px;
   align-items: center;
+  justify-content: space-between;
 }
 
 .chiffres p {
   margin: 0;
+  color: var(--blanc);
 }
 .tapis-container div {
   font-family: var(--font_family);
@@ -172,4 +181,47 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.chip {
+  background-color: transparent;
+  border: none;
+}
+.chip img {
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.icon-button {
+  background-color: transparent;
+  border: none;
+  transition: transform 0.1s ease, opacity 0.1s ease;
+  cursor: pointer;
+}
+.icon-button img {
+  width: 30px;
+}
+
+.icon-button:hover {
+  transform: scale(1.1);
+  opacity: 0.9;
+}
+
+.chip:not(.selected) img:hover {
+  transform: translateY(-7px);
+}
+
+/* état sélectionné : reste levé + contour blanc */
+.chip.selected img {
+  transform: translateY(-7px);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+}
+
+/* jeton posé sur une case du tapis */
+.bet-token {
+  position: absolute;
+  pointer-events: none; /* pour que les clics restent sur la case */
+  width: 32px; /* adapte à la taille de tes images */
+  height: 32px;
+  transform: translate(-50%, -50%);
 }

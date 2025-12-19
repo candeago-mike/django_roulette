@@ -13,30 +13,8 @@
       <div class="roulette-container">
         <div class="arrow"></div>
         <div class="roulette" id="roulette"></div>
-      </div>
-      <div class="tapis-container">
-        <div id="tapis"></div>
-        <p>Numéro gagnant : <span id="result-number">–</span></p>
-
         <div class="panneau">
-          <div class="jetons">
-            <div class="chips">
-              <button class="chip" data-value="1">1</button>
-              <button class="chip" data-value="5">5</button>
-              <button class="chip" data-value="10">10</button>
-              <button class="chip" data-value="25">25</button>
-            </div>
-            <button id="spin-button">Lancer</button>
-          </div>
           <div class="chiffres">
-            <div>
-              <img
-                class="money"
-                src="../../static/img/money.png"
-                alt="money icone"
-              />
-              <p><span id="total-bet">0</span> €</p>
-            </div>
             <div>
               <img
                 class="money"
@@ -45,7 +23,43 @@
               />
               <p><span id="balance-value">{{ balance }}</span> €</p>
             </div>
+            <div>
+              <img
+                class="money"
+                src="../../static/img/jeton-mise.png"
+                alt="Mise icone"
+              />
+              <p><span id="total-bet">0</span> €</p>
+            </div>
           </div>
+        </div>
+      </div>
+      <div class="tapis-container">
+        <div id="tapis"></div>
+        <p>Numéro gagnant : <span id="result-number">–</span></p>
+        <div class="jetons">
+          <div class="chips">
+            <button class="chip" data-value="1">
+              <img src="../../static/img/jeton1.png" alt="Jeton 1" />
+            </button>
+            <button class="chip" data-value="5">
+              <img src="../../static/img/jeton5.png" alt="Jeton 5" />
+            </button>
+            <button class="chip" data-value="10">
+              <img src="../../static/img/jeton10.png" alt="Jeton 10" />
+            </button>
+            <button class="chip" data-value="25">
+              <img src="../../static/img/jeton25.png" alt="Jeton 25" />
+            </button>
+          </div>
+          <button
+            id="clear-bets-button"
+            class="icon-button"
+            title="Effacer les mises"
+          >
+            <img src="../../static/img/again.png" alt="Icone again" />
+          </button>
+          <button id="spin-button">Lancer</button>
         </div>
       </div>
     </div>

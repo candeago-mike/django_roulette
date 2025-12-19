@@ -63,6 +63,10 @@ def home_view(request):
     return render(request, "casino_app/home.html")
 
 
+def regles_view(request):
+    return render(request, "casino_app/regles.html")
+
+
 @login_required
 def spin_roulette(request):
     number = random.randint(0, 36)

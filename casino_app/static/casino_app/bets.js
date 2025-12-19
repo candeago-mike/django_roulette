@@ -3,6 +3,10 @@ let currentChipImageSrc = null;
 let selectedChipButton = null;
 const clearBetsButton = document.getElementById("clear-bets-button");
 let bets = []; // { type, value, amount }
+const modal = document.getElementById("result-modal");
+const modalNumber = document.getElementById("modal-number");
+const modalWin = document.getElementById("modal-win");
+const modalClose = document.getElementById("modal-close");
 
 const totalBetSpan = document.getElementById("total-bet");
 const spinButton = document.getElementById("spin-button");
@@ -189,17 +193,25 @@ spinButton.addEventListener("click", () => {
     .then((data) => {
       const number = data.number;
 
+      // on garde les données du spin pour la pop-up
+      window.lastSpinData = data;
+
       if (typeof spinRouletteAnimation === "function") {
         spinRouletteAnimation(number);
       } else {
         resultDisplay.innerText = number;
+        // si jamais pas d'animation, on peut fallback et montrer la pop-up direct
+        if (window.showResultModal) {
+          window.showResultModal(number);
+        }
       }
 
       if (typeof data.balance !== "undefined") {
-        clientBalance = data.balance; // on recale la variable JS
-        balanceSpan.textContent = clientBalance; // on met à jour l’affichage
+        clientBalance = data.balance;
+        balanceSpan.textContent = clientBalance;
       }
-      // reset les mises du tour : on enlève les jetons visuels
+
+      // reset visuel des mises
       bets.forEach((b) => {
         if (b.tokenElement && b.tokenElement.parentNode) {
           b.tokenElement.parentNode.removeChild(b.tokenElement);
@@ -226,3 +238,15 @@ clearBetsButton.addEventListener("click", () => {
   bets = [];
   totalBetSpan.textContent = "0";
 });
+
+modalClose.addEventListener("click", () => {
+  modal.classList.add("hidden");
+});
+
+window.showResultModal = function (number) {
+  if (!modal || !modalNumber || !modalWin || !window.lastSpinData) return;
+
+  modalNumber.textContent = number;
+  modalWin.textContent = window.lastSpinData.total_win || 0;
+  modal.classList.remove("hidden");
+};

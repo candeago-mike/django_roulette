@@ -7,12 +7,38 @@
     <link rel="stylesheet" href="{% static 'css/roulette_style.css' %}" />
   </head>
   <body>
+    <header>
+      <nav>
+        <a href="/">Accueil</a>
+        <a href="/regles">Règles</a>
+        <a href="/">Classement</a>
+      </nav>
+    </header>
     <h1>Faites vos jeux</h1>
 
     <div class="rouletteTapis">
-      <div class="roulette-container">
-        <div class="arrow"></div>
-        <div class="roulette" id="roulette"></div>
+      <div class="rouletteMise-container">
+        <div class="roulette-container">
+          <div class="wheel-wrapper">
+            <div class="wheel" id="roulette-wheel">
+              <div class="outerRim"></div>
+              <!-- les 37 secteurs seront injectés en JS -->
+              <div class="pocketsRim"></div>
+
+              <div class="ballTrack" id="ball-track">
+                <div class="ball" id="roulette-ball"></div>
+              </div>
+
+              <div class="pockets"></div>
+              <div class="cone"></div>
+              <div class="turret"></div>
+              <div class="turretHandle">
+                <div class="thendOne"></div>
+                <div class="thendTwo"></div>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="panneau">
           <div class="chiffres">
             <div>
@@ -61,6 +87,15 @@
           </button>
           <button id="spin-button">Lancer</button>
         </div>
+      </div>
+    </div>
+
+    <!-- pop-up résultat -->
+    <div id="result-modal" class="result-modal hidden">
+      <div class="result-modal-content">
+        <p>Numéro gagnant : <span id="modal-number"></span></p>
+        <p>Gain : <span id="modal-win"></span> €</p>
+        <button id="modal-close">OK</button>
       </div>
     </div>
 

@@ -53,3 +53,7 @@ h1 {
 #roulette_home {
   width: 100%;
 }
+
+#Jouer, #regles {
+  cursor: pointer;
+}

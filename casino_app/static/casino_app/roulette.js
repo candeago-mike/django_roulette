@@ -1,49 +1,123 @@
-const roulette = document.getElementById("roulette");
+const wheel = document.getElementById("roulette-wheel");
+const ballTrack = document.getElementById("ball-track");
 const resultDisplay = document.getElementById("result-number");
 
-// ordre officiel de la roue européenne (sens horaire)[web:1][web:11]
+const wheelnumbersAC = [
+  0, 26, 3, 35, 12, 28, 7, 29, 18, 22, 9, 31, 14, 20, 1, 33, 16, 24, 5, 10, 23,
+  8, 30, 11, 36, 13, 27, 6, 34, 17, 25, 2, 21, 4, 19, 15, 32,
+];
+// ordre visuel réel de la roue (sens horaire)
 const rouletteOrder = [
   0, 32, 15, 19, 4, 21, 2, 25, 17, 34, 6, 27, 13, 36, 11, 30, 8, 23, 10, 5, 24,
   16, 33, 1, 20, 14, 31, 9, 22, 18, 29, 7, 28, 12, 35, 3, 26,
 ];
+const numRed = [
+  1, 3, 5, 7, 9, 12, 14, 16, 18, 19, 21, 23, 25, 27, 30, 32, 34, 36,
+];
 
-// ----- création des cases autour du cercle -----
-const radius = 160; // rayon du cercle des numéros
-const center = 200; // centre du div 400x400
-const itemRadius = 20; // rayon visuel de chaque case
+// construire la roue camembert
+function buildWheelSegments() {
+  wheelnumbersAC.forEach((n, i) => {
+    const a = i + 1;
+    const spanClass = n < 10 ? "single" : "double";
 
-rouletteOrder.forEach((num, i) => {
-  const div = document.createElement("div");
-  div.className = "number";
-  div.innerText = num;
+    const sect = document.createElement("div");
+    sect.id = "sect" + a;
+    sect.className = "sect";
 
-  // angle autour du cercle (en radians)
-  const angle = (i / rouletteOrder.length) * 2 * Math.PI;
-  div.style.left = `${center + radius * Math.cos(angle) - itemRadius}px`;
-  div.style.top = `${center + radius * Math.sin(angle) - itemRadius}px`;
+    const span = document.createElement("span");
+    span.className = spanClass;
+    span.innerText = n;
+    sect.appendChild(span);
 
-  div.style.backgroundColor = numberColors[num];
+    const block = document.createElement("div");
+    block.className = "block";
+    sect.appendChild(block);
 
-  roulette.appendChild(div);
-});
+    wheel.appendChild(sect);
+  });
 
+  // couleurs et rotation des secteurs
+  for (let i = 1; i <= 37; i++) {
+    const sect = document.getElementById("sect" + i);
+    const block = sect.querySelector(".block");
+    const n = wheelnumbersAC[i - 1];
+    const deg = 9.73; // angle utilisé dans le CodePen
 
-function spinRouletteAnimation(number) {
-  // on affiche le numéro gagnant
-  resultDisplay.innerText = number;
+    if (n === 0) {
+      block.style.backgroundColor = "#016D29"; // vert
+    } else if (numRed.includes(n)) {
+      block.style.backgroundColor = "#E0080B"; // rouge
+    } else {
+      block.style.backgroundColor = "#000"; // noir
+    }
+    block.style.transform = `rotate(${deg}deg)`;
 
-  const index = rouletteOrder.indexOf(number);
-  if (index === -1) {
-    // au cas où le numéro ne serait pas trouvé (dev)
-    return;
-  }
-
-  const baseAngle = 360 - (index / rouletteOrder.length) * 360;
-  const stopAngle = baseAngle - 360 * 5;
-
-  roulette.style.transform = `rotate(${stopAngle}deg)`;
-
-  if (window.highlightTableNumber) {
-    window.highlightTableNumber(number);
+    sect.style.transform = `rotate(${(i - 1) * deg}deg)`;
   }
 }
+
+buildWheelSegments();
+
+function spinRouletteAnimation(winningNumber) {
+  resultDisplay.innerText = winningNumber;
+
+  let index = rouletteOrder.indexOf(winningNumber);
+  if (index === -1) index = 0;
+
+  const segmentDeg = 360 / rouletteOrder.length; // ~9.73
+
+  // angle pour placer la boule au centre du segment
+  let degree = index * segmentDeg + segmentDeg / 2;
+
+  // --- petit offset pour corriger le décalage visuel ---
+  // si la boule est un peu "trop loin" dans le sens de rotation,
+  // enlève quelques degrés (ex: 2 ou 3). Si elle est "trop avant", ajoute.
+  const pixelOffsetDeg = -3; // à ajuster: -2, -3, -4 selon ce que tu observes
+  degree += pixelOffsetDeg;
+  // ------------------------------------------------------
+
+  wheel.style.animation = "wheelRotate 2s linear infinite";
+  ballTrack.style.animation = "ballRotate 1s linear infinite";
+
+  const freeSpinDuration = 3000;
+
+  setTimeout(() => {
+    const computedWheelStyle = window.getComputedStyle(wheel);
+    const wheelMatrix = computedWheelStyle.transform;
+
+    wheel.style.animation = "none";
+    if (wheelMatrix && wheelMatrix !== "none") {
+      wheel.style.transform = wheelMatrix;
+    }
+
+    ballTrack.style.animation = "none";
+
+    const style = document.createElement("style");
+    style.type = "text/css";
+    style.innerText =
+      "@keyframes ballStopExact {from {transform: rotate(0deg);} to {transform: rotate(-" +
+      degree +
+      "deg);}}";
+    document.head.appendChild(style);
+
+    ballTrack.style.transform = "rotate(0deg)";
+    ballTrack.style.animation = "ballStopExact 2.5s ease-out forwards";
+
+    setTimeout(() => {
+      ballTrack.style.animation = "none";
+      ballTrack.style.transform = "rotate(-" + degree + "deg)";
+
+      if (window.highlightTableNumber) {
+        window.highlightTableNumber(winningNumber);
+      }
+      if (window.showResultModal) {
+        window.showResultModal(winningNumber);
+      }
+
+      style.remove();
+    }, 2500);
+  }, freeSpinDuration);
+}
+// exposer pour bets.js
+window.spinRouletteAnimation = spinRouletteAnimation;

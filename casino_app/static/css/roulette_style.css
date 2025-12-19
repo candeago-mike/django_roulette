@@ -12,6 +12,8 @@ body {
   background-color: var(--vert);
 }
 
+/* ------- panneau / infos ------- */
+
 .panneau {
   display: flex;
   flex-direction: column;
@@ -52,6 +54,7 @@ body {
   margin: 0;
   color: var(--blanc);
 }
+
 .tapis-container div {
   font-family: var(--font_family);
   font-size: 18px;
@@ -62,46 +65,248 @@ body {
   align-items: center;
   gap: 20px;
 }
+
+/* ------- wrapper global roue ------- */
+
 .roulette-container {
   position: relative;
   width: 400px;
   height: 400px;
   margin: 20px auto;
+  display: flex;
+  justify-content: center;
 }
 
-.roulette {
+/* wrapper qui contient roue + boule */
+.wheel-wrapper {
   position: relative;
-  width: 400px;
-  height: 400px;
+  width: 350px;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
-  border: 5px solid #333;
+  background: radial-gradient(
+    circle at 50% 50%,
+    #2d2d2d 0,
+    #111 60%,
+    #000 100%
+  );
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  overflow: hidden;
+}
+
+/* --- WHEEL LIKE CODEPEN --- */
+
+.wheel {
+  height: 312px;
+  width: 312px;
+  position: relative;
   margin: 0 auto;
-  transition: transform 3s ease-out;
 }
 
-.arrow {
+/* piste sur laquelle tourne la boule */
+.ballTrack {
+  width: 212px;
+  height: 207px;
   position: absolute;
-  top: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 20px solid yellow;
-  z-index: 10;
+  left: 47.5px;
+  top: 50px;
+  border-radius: 100%;
+  z-index: 2;
 }
 
-.number {
+/* boule blanche */
+.ball {
+  background-color: #fff;
+  width: 16px;
+  height: 16px;
+  border-radius: 100%;
+  position: relative;
+  left: 109px;
+  top: -8px;
+}
+
+.turret {
+  border-radius: 100%;
+  background: radial-gradient(circle at 30% 30%, #f3c620, #1a1608);
+  width: 45px;
+  height: 45px;
   position: absolute;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  top: 133px;
+  left: 134px;
+  z-index: 3;
+}
+
+.turretHandle {
+  background: radial-gradient(circle at 44%, #f3c620, #6a570f);
+  width: 87px;
+  height: 14px;
+  position: absolute;
+  left: 113px;
+  top: 148px;
+  z-index: 2;
+}
+
+.thendOne,
+.thendTwo {
+  border-radius: 100%;
+  background: radial-gradient(circle at 30% 30%, #f3c620, #1a1608);
+  width: 25px;
+  height: 25px;
+  position: absolute;
+}
+
+.thendOne {
+  top: -6px;
+  left: -20px;
+}
+
+.thendTwo {
+  top: -6px;
+  left: 83px;
+}
+
+.outerRim {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 290px;
+  height: 290px;
+  border-radius: 100%;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+  border: 10px solid #f3c620;
+}
+
+/* segments camembert */
+
+.block {
+  transition: all 1s;
+  position: absolute;
+  width: 290px;
+  height: 290px;
+  border-radius: 100%;
+  clip: rect(0px, 145px, 290px, 0px);
+}
+
+.sect {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 290px;
+  height: 290px;
+  border-radius: 100%;
+  clip: rect(0px, 290px, 290px, 145px);
+}
+
+.double,
+.single {
+  position: absolute;
+  z-index: 1;
+  color: #fff;
+  font-size: 14px;
+  transform: rotate(3deg);
+}
+
+.double {
+  left: 148px;
+  margin-top: 4.5px;
+}
+
+.single {
+  left: 152px;
+  margin-top: 4.5px;
+}
+
+.pockets {
+  position: absolute;
+  top: 37px;
+  left: 37px;
+  width: 235px;
+  height: 235px;
+  background-color: #000;
+  border-radius: 100%;
+  opacity: 0.5;
+}
+
+.pocketsRim {
+  position: absolute;
+  top: 34px;
+  left: 34px;
+  width: 235px;
+  height: 235px;
+  border-radius: 100%;
+  z-index: 2;
+  border: 3px solid silver;
+}
+
+.cone {
+  position: absolute;
+  top: 62px;
+  left: 61px;
+  height: 180px;
+  width: 180px;
+  border: 3px solid #9f9a9a;
+  border-radius: 100%;
+  z-index: 2;
+  background: radial-gradient(circle at 100px 100px, #892c10, #000);
+}
+
+/* animations globales roue / boule */
+
+@keyframes wheelRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@keyframes ballRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-359deg);
+  }
+}
+
+/* ------- pop-up résultat ------- */
+
+.result-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 14px;
+  z-index: 999;
+}
+
+.result-modal.hidden {
+  display: none;
+}
+
+.result-modal-content {
+  background: #111;
+  border-radius: 8px;
+  padding: 20px 30px;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+.result-modal-content p {
+  margin: 8px 0;
+}
+
+.result-modal-content button {
+  margin-top: 12px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
 }
 
 /******** Tapis de jeu ********/
@@ -116,12 +321,13 @@ body {
 
 #tapis {
   display: grid;
-  grid-template-columns: 60px repeat(12, 40px) 60px; /* +1 col pour 2 à 1 */
+  grid-template-columns: 60px repeat(12, 40px) 60px;
   grid-auto-rows: 40px;
   gap: 2px;
   padding: 10px;
   color: var(--blanc);
 }
+
 .case-top-half {
   border: 1px solid #fff;
   display: flex;
@@ -135,7 +341,7 @@ body {
   grid-column: 1 / 2;
   display: flex;
   align-items: center;
-  border-radius: 20px 0 0 2 0px;
+  border-radius: 20px 0 0 20px;
   justify-content: center;
   background: rgb(57, 102, 57);
 }
@@ -150,6 +356,7 @@ body {
 .case-red {
   background: red;
 }
+
 .case-black {
   background: black;
 }
@@ -170,11 +377,11 @@ body {
 .case-outside-red {
   background: red;
 }
+
 .case-outside-black {
   background: black;
 }
 
-/* cases 2 à 1 au bout des colonnes */
 .case-column-bet {
   border: 1px solid #fff;
   display: flex;
@@ -183,10 +390,13 @@ body {
   cursor: pointer;
 }
 
+/* ------- jetons ------- */
+
 .chip {
   background-color: transparent;
   border: none;
 }
+
 .chip img {
   cursor: pointer;
   transition: all 0.1s ease-in-out;
@@ -198,6 +408,7 @@ body {
   transition: transform 0.1s ease, opacity 0.1s ease;
   cursor: pointer;
 }
+
 .icon-button img {
   width: 30px;
 }
@@ -211,17 +422,15 @@ body {
   transform: translateY(-7px);
 }
 
-/* état sélectionné : reste levé + contour blanc */
 .chip.selected img {
   transform: translateY(-7px);
   filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
 }
 
-/* jeton posé sur une case du tapis */
 .bet-token {
   position: absolute;
-  pointer-events: none; /* pour que les clics restent sur la case */
-  width: 32px; /* adapte à la taille de tes images */
+  pointer-events: none;
+  width: 32px;
   height: 32px;
   transform: translate(-50%, -50%);
 }

@@ -10,4 +10,6 @@ urlpatterns = [
     path("spin/", views.spin_roulette, name="spin"),
     path('', views.home_view, name='home'),
     path("bet-spin/", views.bet_and_spin, name="bet_spin"),
+    path("classement/", views.classement_view, name="classement"),
+
 ]

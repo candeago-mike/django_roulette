@@ -64,47 +64,122 @@ header {
 
 header a {
   text-decoration: none;
-    color: var(--vert_fonce);
-    font-family: var(--font_h2);
-    font-weight: 900;
-    font-size: 18px;
+  color: var(--vert_fonce);
+  font-family: var(--font_h2);
+  font-weight: 900;
+  font-size: 18px;
 }
 header nav {
-    display: flex;
-    gap:30px;
+  display: flex;
+  gap: 30px;
 }
-
 
 .connexion-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .connexion-container form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 400px;
 }
 
-.connexion-container input, .connexion-container button {
-    padding: 10px 14px;
+.connexion-container input,
+.connexion-container button {
+  padding: 10px 14px;
 }
 
 .connexion-container a {
-    text-decoration: none;
-    color: var(--blanc);
-    margin-top: 40px;
+  text-decoration: none;
+  color: var(--blanc);
+  margin-top: 40px;
 }
 
-.connexion-container input, input:-internal-autofill-selected {
-    background-color: var(--vert) !important;
+.connexion-container input,
+input:-internal-autofill-selected {
+  background-color: var(--vert) !important;
 }
 .connexion-container input::placeholder {
-    color: var(--blanc);
+  color: var(--blanc);
 }
 .connexion-container button {
-    font-family: var(--font_h2);
-    color: var(--vert_fonce);
-    font-weight: 900;
-    cursor: pointer;
+  font-family: var(--font_h2);
+  color: var(--vert_fonce);
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.Classement {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 20px;
+  background: #0f0f0f;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.Classement h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #f1c40f; /* or casino */
+  font-size: 26px;
+  letter-spacing: 1px;
+}
+
+.Classement table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+  font-size: 16px;
+}
+
+.Classement thead {
+  background: #1c1c1c;
+}
+
+.Classement th,
+.Classement td {
+  padding: 12px 14px;
+  text-align: left;
+}
+
+.Classement th {
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #f1c40f;
+}
+
+.Classement tbody tr {
+  border-bottom: 1px solid #2c2c2c;
+  transition: background 0.2s ease;
+}
+
+.Classement tbody tr:nth-child(even) {
+  background: #181818;
+}
+
+.Classement tbody tr:hover {
+  background: #262626;
+}
+
+.Classement td:last-child {
+  text-align: right;
+  font-weight: bold;
+  color: #2ecc71; /* vert pour le solde */
+}
+
+.Classement tbody {
+  counter-reset: rank;
+}
+
+.Classement tbody tr {
+  counter-increment: rank;
+}
+
+.Classement tbody tr td:first-child::before {
+  content: counter(rank) ". ";
+  color: #f1c40f;
+  font-weight: bold;
 }

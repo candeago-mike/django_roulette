@@ -42,6 +42,9 @@ def logout_view(request):
     logout(request)
     return redirect("login")
 
+def classement_view(request):
+    profiles = Profile.objects.select_related('user').order_by('-balance')[:10]
+    return render(request, "casino_app/classement.html", {"profiles": profiles})
 
 def roulette_view(request):
     if not request.user.is_authenticated:

@@ -1,7 +1,7 @@
 const wheel = document.getElementById("roulette-wheel");
 const ballTrack = document.getElementById("ball-track");
 const resultDisplay = document.getElementById("result-number");
-
+let historique = [];
 const wheelnumbersAC = [
   0, 26, 3, 35, 12, 28, 7, 29, 18, 22, 9, 31, 14, 20, 1, 33, 16, 24, 5, 10, 23,
   8, 30, 11, 36, 13, 27, 6, 34, 17, 25, 2, 21, 4, 19, 15, 32,
@@ -118,6 +118,35 @@ function spinRouletteAnimation(winningNumber) {
       style.remove();
     }, 2500);
   }, freeSpinDuration);
+  console.log(winningNumber);
+  // Met à jour l'historique des résultats
+  historique.unshift(winningNumber);
+  if (historique.length > 10) {
+    historique.pop(); // garde seulement les 10 derniers résultats
+  }
+  console.log("Historique des résultats :", historique);
+
+  // Met à jour l'affichage des derniers numéros
+  const lastNumbersDiv = document.getElementById("last-numbers");
+  if (lastNumbersDiv) {
+    lastNumbersDiv.innerHTML = "";
+    historique.forEach((num) => {
+      const numDiv = document.createElement("div");
+      numDiv.classList.add("last-number");
+
+      // couleur roulette
+      if (num === 0) {
+        numDiv.classList.add("green");
+      } else if (numRed.includes(num)) {
+        numDiv.classList.add("red");
+      } else {
+        numDiv.classList.add("black");
+      }
+
+      numDiv.innerText = num;
+      lastNumbersDiv.appendChild(numDiv);
+    });
+  }
 }
 // exposer pour bets.js
 window.spinRouletteAnimation = spinRouletteAnimation;

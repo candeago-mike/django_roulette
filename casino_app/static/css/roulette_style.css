@@ -434,3 +434,34 @@ body {
   height: 32px;
   transform: translate(-50%, -50%);
 }
+
+#last-numbers {
+  display: flex;
+  gap: 6px;
+  margin-top: 6px;
+  margin-bottom: 18px;
+}
+
+.last-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px; /* carré légèrement arrondi */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  font-size: 14px;
+}
+
+.last-number.red {
+  background-color: #e0080b;
+}
+
+.last-number.black {
+  background-color: #000;
+}
+
+.last-number.green {
+  background-color: #016d29;
+}
